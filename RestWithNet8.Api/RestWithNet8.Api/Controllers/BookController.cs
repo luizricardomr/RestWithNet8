@@ -1,6 +1,7 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using RestWithNet8.Api.Business;
+using RestWithNet8.Api.Data.VO;
 using RestWithNet8.Api.Model;
 
 namespace RestWithNet8.Api.Controllers
@@ -36,7 +37,7 @@ namespace RestWithNet8.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Book person)
+        public IActionResult Post([FromBody] BookVO person)
         {            
             if (person == null) return BadRequest();
 
@@ -44,7 +45,7 @@ namespace RestWithNet8.Api.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Book person)
+        public IActionResult Put([FromBody] BookVO person)
         {
             if (person == null) return BadRequest();
 

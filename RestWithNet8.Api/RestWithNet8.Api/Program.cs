@@ -5,6 +5,7 @@ using RestWithNet8.Api.Business;
 using RestWithNet8.Api.Business.Implementations;
 using RestWithNet8.Api.Model.Context;
 using RestWithNet8.Api.Repository;
+using RestWithNet8.Api.Repository.Generic;
 using RestWithNet8.Api.Repository.Implementations;
 using Serilog;
 
@@ -27,11 +28,9 @@ builder.Services.AddApiVersioning();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IPersonBusiness, PersonBusiness>();
 builder.Services.AddScoped<IBookBusiness, BookBusiness>();
-builder.Services.AddScoped<IPersonRepository, PersonRepository>();
-
-builder.Services.AddScoped<IBookBusiness, BookBusiness>();
-builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
 var app = builder.Build();
 

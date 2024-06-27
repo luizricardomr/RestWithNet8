@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using RestWithNet8.Api.Model.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RestWithNet8.Api.Model
 {
     [Table("books")]
 
-    public class Book
+    public class Book: BaseEntity
     {
-        [Column("id")]
-        public long Id { get; set; }
+
         [Column("author")]
         public string Author { get; set; }
         [Column("launch_date")]

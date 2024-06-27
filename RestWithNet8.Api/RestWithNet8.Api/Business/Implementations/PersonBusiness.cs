@@ -1,44 +1,49 @@
-﻿using RestWithNet8.Api.Model;
-using RestWithNet8.Api.Model.Context;
-using RestWithNet8.Api.Repository;
-using System;
+﻿using RestWithNet8.Api.Data.Converter.Implementations;
+using RestWithNet8.Api.Data.VO;
+using RestWithNet8.Api.Model;
+using RestWithNet8.Api.Repository.Generic;
 
 namespace RestWithNet8.Api.Business.Implementations
 {
     public class PersonBusiness : IPersonBusiness
     {
-        private readonly IPersonRepository _repository;
+        private readonly IRepository<Person> _repository;
+        private readonly PersonConverter _converter;
 
-        public PersonBusiness(IPersonRepository repository)
+        public PersonBusiness(IRepository<Person> repository)
         {
             _repository = repository;
+            _converter = new PersonConverter();
         }
 
-        public List<Person> FinAll()
+        public List<PersonVO> FinAll()
         {
-            return _repository.FinAll();
+            return _converter.Parse(_repository.FinAll());
         }
 
-        public Person FindById(long id)
+        public PersonVO FindById(long id)
         {
-            return _repository.FindById(id);
+            return _converter.Parse(_repository.FindById(id));
         }
 
-        public Person Create(Person person)
+        public PersonVO Create(PersonVO person)
         {
-            return _repository.Create(person);
+            var personEntity = _converter.Parse(person);
+            personEntity = _repository.Create(personEntity);
+            return _converter.Parse(personEntity);
         }
 
-        public Person Update(Person person)
+        public PersonVO Update(PersonVO person)
         {
-            return _repository.Update(person);
+            var personEntity = _converter.Parse(person);
+            personEntity = _repository.Update(personEntity);
+            return _converter.Parse(personEntity);
         }
 
         public void Delete(long id)
         {
             _repository.Delete(id);
-            
-        }   
+        }
 
     }
 }
