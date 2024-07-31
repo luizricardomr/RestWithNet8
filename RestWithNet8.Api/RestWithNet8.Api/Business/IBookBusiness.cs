@@ -9,6 +9,6 @@ namespace RestWithNet8.Api.Business
         BookVO FindById(long id);
         BookVO Update(BookVO person);
         void Delete(long id);
-        List<BookVO> FinAll();
+        List<BookVO> FindAll();
     }
 }

@@ -9,7 +9,9 @@ namespace RestWithNet8.Api.Repository.Generic
         T FindById(long id);
         T Update(T item);
         void Delete(long id);
-        List<T> FinAll();
+        List<T> FindAll();
         bool Exists(long id);
+        List<T> FindWithPagedSearch(string query);
+        int GetCount(string query);
     }
 }

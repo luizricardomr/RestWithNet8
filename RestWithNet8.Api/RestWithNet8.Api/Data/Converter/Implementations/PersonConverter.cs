@@ -16,7 +16,8 @@ namespace RestWithNet8.Api.Data.Converter.Implementations
                 Address = origin.Address,
                 FirstName = origin.FirstName,
                 LastName = origin.LastName,
-                Gender = origin.Gender  
+                Gender = origin.Gender  ,
+                Enabled = origin.Enabled 
             };
         }       
 
@@ -30,7 +31,8 @@ namespace RestWithNet8.Api.Data.Converter.Implementations
                 Address = origin.Address,
                 FirstName = origin.FirstName,
                 LastName = origin.LastName,
-                Gender = origin.Gender
+                Gender = origin.Gender,
+                Enabled = origin.Enabled
             };
         }
         public List<Person> Parse(List<PersonVO> origin)

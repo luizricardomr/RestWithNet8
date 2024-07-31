@@ -1,9 +1,7 @@
 ﻿using RestWithNet8.Api.Data.Converter.Implementations;
 using RestWithNet8.Api.Data.VO;
 using RestWithNet8.Api.Model;
-using RestWithNet8.Api.Repository;
 using RestWithNet8.Api.Repository.Generic;
-using System;
 
 namespace RestWithNet8.Api.Business.Implementations
 {
@@ -18,9 +16,9 @@ namespace RestWithNet8.Api.Business.Implementations
             _converter = new BookConverter();
         }
 
-        public List<BookVO> FinAll()
+        public List<BookVO> FindAll()
         {
-            return _converter.Parse(_repository.FinAll());
+            return _converter.Parse(_repository.FindAll());
         }
 
         public BookVO FindById(long id)
@@ -45,7 +43,6 @@ namespace RestWithNet8.Api.Business.Implementations
         public void Delete(long id)
         {
             _repository.Delete(id);
-
         }
 
     }
