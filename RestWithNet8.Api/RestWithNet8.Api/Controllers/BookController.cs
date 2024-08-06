@@ -2,6 +2,7 @@ using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestWithNet8.Api.Business;
+using RestWithNet8.Api.Business.Implementations;
 using RestWithNet8.Api.Data.VO;
 using RestWithNet8.Api.Hipermedia.Filters;
 using RestWithNet8.Api.Model;
@@ -24,15 +25,32 @@ namespace RestWithNet8.Api.Controllers
             _bookBusiness = bookBusiness;
         }
 
-        [HttpGet]
+        //[HttpGet]
+        //[ProducesResponseType((200), Type = typeof(List<BookVO>))]
+        //[ProducesResponseType(204)]
+        //[ProducesResponseType(400)]
+        //[ProducesResponseType(401)]
+        //[TypeFilter(typeof(HyperMediaFilter))]
+        //public IActionResult Get()
+        //{
+        //    return Ok(_bookBusiness.FindAll());
+        //}
+
+        // Maps GET requests to https://localhost:{port}/api/book
+        // Get no parameters for FindAll -> Search All
+        [HttpGet("{sortDirection}/{pageSize}/{page}")]
         [ProducesResponseType((200), Type = typeof(List<BookVO>))]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult Get()
+        public IActionResult Get(
+            [FromQuery] string? title,
+            string sortDirection,
+            int pageSize,
+            int page)
         {
-            return Ok(_bookBusiness.FindAll());
+            return Ok(_bookBusiness.FindWithPagedSearch(title, sortDirection, pageSize, page));
         }
 
         [HttpGet("{id}")]
